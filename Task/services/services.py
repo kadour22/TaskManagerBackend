@@ -1,10 +1,11 @@
-from .models import Task
+from Task.models import Task
 
 def task_list() :
     return Task.objects.select_related("user").all()
 
-def create_task(data):
-    return Task.objects.create(**data)
+def create_task(request,data):
+    user  = request.user
+    return Task.objects.create(user=user, **data)
 
 def update_task(task_id, data):
     task = Task.objects.get(id=task_id)

@@ -17,9 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Task',
-    'rest_framework',
-    'anymail',
-    'background_task'
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

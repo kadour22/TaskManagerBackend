@@ -18,3 +18,5 @@ def delete_task(task_id):
     task = Task.objects.get(id=task_id)
     task.delete()
     return True
+
+{"title": "New Task","scheduled_time": "2025-10-15T10:21:52Z"}

@@ -2,8 +2,6 @@ from pathlib import Path
 from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -93,3 +91,6 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 BREVO_API_KEY = config('BREVO_API_KEY')
 CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG')

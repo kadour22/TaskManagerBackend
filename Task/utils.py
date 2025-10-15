@@ -1,9 +1,19 @@
-from .tasks import schedule_task_email
-from django.utils import timezone
+import os
+import requests
+from decouple import config
 
-def schedule_email_for_task(task):
-    if task.scheduled_time and task.scheduled_time > timezone.now():
-        schedule_task_email.apply_async(
-            args=[task.id],
-            eta=task.scheduled_time  # exact datetime when to run
-        )
+def send_email_via_brevo(to_email, task_title):
+    url = "https://api.brevo.com/v3/smtp/email"
+    api_key = config("BREVO_API_KEY")
+    data = {
+        "sender": {"name": "Task Reminder", "email":config("EMAIL_HOST_USER")},
+        "to": [{"email": to_email, "name": "User"}],
+        "subject": "Task Reminder",
+        "htmlContent": f"<html><body><h1>Hello {task.user.first_name}, Reminder for your task: {task_title}</h1></body></html>"
+        }
+    headers = {
+        "accept": "application/json",
+        "api-key": api_key,
+        "content-type": "application/json"
+    }
+    requests.post(url, json=data, headers=headers)

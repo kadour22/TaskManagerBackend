@@ -3,6 +3,10 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG')
+
+
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
@@ -15,6 +19,7 @@ INSTALLED_APPS = [
     'Task',
     'rest_framework',
     'anymail',
+    'background_task'
 ]
 
 MIDDLEWARE = [
@@ -72,25 +77,20 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_TZ = True
-
+TIME_ZONE = 'Africa/Tunis'
 
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_BACKEND = config('EMAIL_BACKEND')
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-BREVO_API_KEY = config('BREVO_API_KEY')
-CELERY_BROKER_URL = config('CELERY_BROKER_URL')
-
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG')
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+CELERY_BEAT_SCHEDULE = {
+    'check_scheduled_tasks_every_minute': {
+        'task': 'Task.tasks.check_and_send_reminders',
+        'schedule': 60.0,
+    },
+}

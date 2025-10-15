@@ -5,10 +5,12 @@ from rest_framework import status
 from .serializers import TaskSerializer
 from .models import Task
 from .services.services import task_list, create_task, update_task, delete_task
+from django.conf import settings
 
 class TaskListCreateView(APIView):
     def get(self, request):
         tasks = task_list()
+        print(tasks)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

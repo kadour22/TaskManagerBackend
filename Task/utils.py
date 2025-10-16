@@ -17,3 +17,5 @@ def send_email_via_brevo(to_email, task_title):
         "content-type": "application/json"
     }
     requests.post(url, json=data, headers=headers)
+
+    {"title": "Task 1", "scheduled_time": "2025-10-15T10:11:01Z"}

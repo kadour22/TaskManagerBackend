@@ -9,7 +9,10 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG')
 
 
-ALLOWED_HOSTS = ['taskmanagerbackend-1-fnmh.onrender.com']
+ALLOWED_HOSTS = [
+    'taskmanagerbackend-1-fnmh.onrender.com',
+    '127.0.0.1:8000'
+    ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',

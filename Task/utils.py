@@ -9,7 +9,7 @@ def send_email_via_brevo(to_email, task_title):
         "sender": {"name": "Task Reminder", "email":config("EMAIL_HOST_USER")},
         "to": [{"email": to_email, "name": "User"}],
         "subject": "Task Reminder",
-        "htmlContent": f"<html><body><h1>Hello {task.user.first_name}, Reminder for your task: {task_title}</h1></body></html>"
+        "htmlContent": f"<html><body><h1>Hello Reminder for your task: {task_title}</h1></body></html>"
         }
     headers = {
         "accept": "application/json",

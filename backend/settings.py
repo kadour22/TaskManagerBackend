@@ -11,7 +11,7 @@ DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = [
     'taskmanagerbackend-1-fnmh.onrender.com',
-    '127.0.0.1:8000'
+    '127.0.0.1'
     ]
 
 INSTALLED_APPS = [

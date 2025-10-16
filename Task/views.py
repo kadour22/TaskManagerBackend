@@ -1,13 +1,17 @@
+# django imports
+from django.conf import settings
+# rest framework imports
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-# from 
+from rest_framework.permissions import IsAuthenticated
+# local imports 
 from .serializers import TaskSerializer
 from .models import Task
 from .services.services import task_list, create_task, update_task, delete_task
-from django.conf import settings
 
 class TaskListCreateView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         tasks = task_list()
         print(tasks)
@@ -19,6 +23,7 @@ class TaskListCreateView(APIView):
         return Response(status=status.HTTP_201_CREATED)
 
 class TaskDetailView(APIView):
+    permission_classes = [IsAuthenticated]
     def put(self, request, pk):
         serializer = TaskSerializer(data=request.data, partial=True)
         if serializer.is_valid():

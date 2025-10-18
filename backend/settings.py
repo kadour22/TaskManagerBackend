@@ -90,7 +90,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CELERY_BROKER_URL = config('CELERY_BROKER_URL')
-
+CELERT_BACKEND_URL = config('CELERY_BROKER_URL')
 
 CELERY_BEAT_SCHEDULE = {
     'check_scheduled_tasks_every_minute': {

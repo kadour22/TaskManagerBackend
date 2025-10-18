@@ -11,4 +11,5 @@ def check_and_send_reminders():
         send_email_via_brevo(task.user.email, task.title)
         task.is_notified = True
         task.save()
+        print(f"Sent reminder for task: {task.title} to {task.user.email}")
 

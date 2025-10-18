@@ -90,7 +90,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CELERY_BROKER_URL = config('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND')
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_BEAT_SCHEDULE = {
     'check_scheduled_tasks_every_minute': {
         'task': 'Task.tasks.check_and_send_reminders',

@@ -13,7 +13,7 @@ from .services.services import task_list, create_task, update_task, delete_task
 class TaskListCreateView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
-        tasks = task_list()
+        tasks = task_list(request)
         print(tasks)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -36,3 +36,8 @@ class TaskDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class create_challenge_apiview(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        # Logic to create a challenge
+        return Response(status=status.HTTP_201_CREATED)

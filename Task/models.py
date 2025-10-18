@@ -16,3 +16,17 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+class Challenge(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    start_date  = models.DateTimeField()
+    end_date    = models.DateTimeField()
+    user        = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    is_done     = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name

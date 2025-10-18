@@ -1,7 +1,7 @@
 from Task.models import Task
 
-def task_list() :
-    return Task.objects.select_related("user").all()
+def task_list(request) :
+    return Task.objects.filter(user=request.user)
 
 def create_task(request,data):
     user  = request.user

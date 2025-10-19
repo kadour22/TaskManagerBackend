@@ -8,13 +8,12 @@ from rest_framework.permissions import IsAuthenticated
 # local imports 
 from .serializers import TaskSerializer
 from .models import Task
-from .services.services import task_list, create_task, update_task, delete_task
+from .services.services import task_list, create_task, update_task, delete_task , get_task
 
 class TaskListCreateView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         tasks = task_list(request)
-        print(tasks)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -31,13 +30,11 @@ class TaskDetailView(APIView):
             return Response(TaskSerializer(task).data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def get(self,task_id):
+        task = get_task(task_id)
+        serializer = TaskSerializer(task,many=False)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+
     def delete(self, request, pk):
         delete_task(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class create_challenge_apiview(APIView):
-    permission_classes = [IsAuthenticated]
-    def post(self, request):
-        # Logic to create a challenge
-        return Response(status=status.HTTP_201_CREATED)

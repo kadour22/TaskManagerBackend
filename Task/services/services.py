@@ -1,4 +1,5 @@
 from Task.models import Task
+from django.shortcuts import get_object_or_404
 
 def task_list(request) :
     return Task.objects.filter(user=request.user)
@@ -18,3 +19,6 @@ def delete_task(task_id):
     task = Task.objects.get(id=task_id)
     task.delete()
     return True
+
+def get_task(task_id):
+    return get_object_or_404(Task, id=task_id)

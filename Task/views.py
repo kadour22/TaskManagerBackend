@@ -1,4 +1,4 @@
-# django imports
+
 from django.conf import settings
 # rest framework imports
 from rest_framework.views import APIView

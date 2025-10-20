@@ -13,7 +13,7 @@ class Task(models.Model):
     scheduled_time = models.DateTimeField(null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_notified = models.BooleanField(default=False)
-
+    priority = models.CharField(choices=[('Low', 'Low'), ('Medium', 'Medium'), ('High', 'High')], max_length=10, default='Medium')
     def __str__(self):
         return self.title
 

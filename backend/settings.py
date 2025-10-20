@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
@@ -98,11 +99,12 @@ USE_TZ = True
 TIME_ZONE = 'Africa/Tunis'
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CELERY_BROKER_URL = config('CELERY_BROKER_URL')
-CELERT_BACKEND_URL = config('CELERY_BROKER_URL')
+CELERY_BACKEND_URL = config('CELERY_BROKER_URL')
 
 CELERY_BEAT_SCHEDULE = {
     'check_scheduled_tasks_every_minute': {
@@ -118,7 +120,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,

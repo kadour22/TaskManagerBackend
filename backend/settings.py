@@ -48,7 +48,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 CORS_ALLOWED_ORIGINS = [
-    "https://tasflow.netlify.app"
+    "https://tasflow.netlify.app",
+    "http://localhost:5173"
 ]
 TEMPLATES = [
     {
@@ -167,3 +168,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SOCIALACCOUNT_PROVIDERS = {}
+
+
+# {"title":"testing","schedule_time"}

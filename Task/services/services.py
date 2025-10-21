@@ -22,3 +22,9 @@ def delete_task(task_id):
 
 def get_task(task_id):
     return get_object_or_404(Task, id=task_id)
+
+def toggle_task_completion(task_id):
+    task = Task.objects.get(id=task_id)
+    task.completed = True if not task.completed else False
+    task.save()
+    return task

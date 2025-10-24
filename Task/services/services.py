@@ -12,8 +12,11 @@ def task_list(request) :
 
 def create_task(request,data):
     user  = request.user
-    serializer = TaskSerializer(task)
-    return Task.objects.create(user=user, **data)
+    serializer = TaskSerializer(user=user)
+    if serializer.is_valid() :
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors)
 
 def update_task(task_id, data):
     task = Task.objects.get(id=task_id)

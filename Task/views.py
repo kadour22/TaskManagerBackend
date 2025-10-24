@@ -19,7 +19,6 @@ class TaskListCreateView(APIView):
 
     def post(self, request):
         task = create_task(request, request.data)
-        serializer = TaskSerializer(task)
         return Response(status=status.HTTP_201_CREATED)
 
 class completed_tasks_view(APIView) :

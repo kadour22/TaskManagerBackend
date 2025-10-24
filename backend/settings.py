@@ -169,5 +169,3 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIALACCOUNT_PROVIDERS = {}
 
-
-# {"title":"testing","schedule_time"}

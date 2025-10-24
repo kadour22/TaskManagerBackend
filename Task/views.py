@@ -8,19 +8,22 @@ from rest_framework.permissions import IsAuthenticated
 # local imports 
 from .serializers import TaskSerializer
 from .models import Task
-from .services.services import task_list, create_task, update_task, delete_task , get_task
+from .services.services import task_list, create_task, update_task, delete_task , get_task, completed_tasks_list
 
 class TaskListCreateView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         tasks = task_list(request)
-        serializer = TaskSerializer(tasks, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
         task = create_task(request, request.data)
         serializer = TaskSerializer(task)
         return Response(status=status.HTTP_201_CREATED)
+
+class completed_tasks_view(APIView) :
+    permission_classes = [IsAuthenticated]
+    def get(self,request) :
+        task = completed_tasks_list(request)
 
 class TaskDetailView(APIView):
     permission_classes = [IsAuthenticated]

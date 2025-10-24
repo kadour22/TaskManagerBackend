@@ -4,10 +4,15 @@ from Task.serializers import TaskSerializer
 from rest_framework.response import Response
 
 def task_list(request) :
-    return Task.objects.filter(user=request.user)
+    
+    tasks = Task.objects.select_related("user").all()
+    serializer = TaskSerializer(tasks , many = True)
+    return Response(serializer.data , status=200)
+
 
 def create_task(request,data):
     user  = request.user
+    serializer = TaskSerializer(task)
     return Task.objects.create(user=user, **data)
 
 def update_task(task_id, data):

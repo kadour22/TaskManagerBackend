@@ -14,6 +14,7 @@ class TaskListCreateView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         tasks = task_list(request)
+        return task
 
     def post(self, request):
         task = create_task(request, request.data)

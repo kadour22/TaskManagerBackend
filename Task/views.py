@@ -10,16 +10,20 @@ from .serializers import TaskSerializer
 from .models import Task
 from .services.services import task_list, create_task, update_task, delete_task , get_task, completed_tasks_list
 
-class TaskListCreateView(APIView):
-    permission_classes = [IsAuthenticated]
-    def get(self, request):
-        tasks = task_list(request)
-        print(tasks)
-        return tasks
 
+class task_list_create(APIView) :
     def post(self, request):
-        task = create_task(request, request.data)
-        return Response(status=status.HTTP_201_CREATED)
+        serializer = TaskSerializer(data=request.data)
+        if serializer.is_valid() :
+            serializer.save()
+            return Response(serializer.data , status=status.HTTP_201_CREATED)
+        return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self,request):
+        tasks = Task.objects.select_related("user").all()
+        serializer = TaskSerializer(tasks , many=True)
+        return Response(serializer.data , status=status.HTTP_200_OK)
+
 
 class completed_tasks_view(APIView) :
     permission_classes = [IsAuthenticated]

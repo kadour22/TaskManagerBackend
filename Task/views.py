@@ -12,6 +12,7 @@ from .services.services import task_list, create_task, update_task, delete_task 
 
 
 class task_list_create(APIView) :
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         serializer = TaskSerializer(data=request.data)
         if serializer.is_valid() :

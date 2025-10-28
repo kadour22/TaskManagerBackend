@@ -23,28 +23,3 @@ class task_list_create(APIView) :
         tasks = Task.objects.select_related("user").all()
         serializer = TaskSerializer(tasks , many=True)
         return Response(serializer.data , status=status.HTTP_200_OK)
-
-
-class completed_tasks_view(APIView) :
-    permission_classes = [IsAuthenticated]
-    def get(self,request) :
-        task = completed_tasks_list(request)
-
-class TaskDetailView(APIView):
-    permission_classes = [IsAuthenticated]
-    def put(self, request, pk):
-        serializer = TaskSerializer(data=request.data, partial=True)
-        if serializer.is_valid():
-            task = update_task(pk, serializer.validated_data)
-            return Response(TaskSerializer(task).data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def get(self,task_id):
-        task = get_task(task_id)
-        serializer = TaskSerializer(task,many=False)
-        return Response(serializer.data,status=status.HTTP_200_OK)
-
-    def delete(self, request, pk):
-        delete_task(pk)
-        return Response(status=status.HTTP_204_NO_CONTENT)
-

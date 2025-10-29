@@ -10,3 +10,4 @@ class TaskSerializer(serializers.ModelSerializer):
     def validate(self,data) :
         if data["title"] == "":
             raise serializers.ValidationError("Title cannot be empty")
+        return data

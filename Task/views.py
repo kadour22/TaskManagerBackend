@@ -27,7 +27,7 @@ class task_list_create(APIView) :
 
 class mark_task_as_completed(APIView):
     permission_classes= [IsAuthenticated]
-    def update(self,request,task_id) :
+    def post(self,request,task_id) :
         task = get_object_or_404(Task,id=task_id)
         task.completed = True
         task.save()

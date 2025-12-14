@@ -15,3 +15,13 @@ def create_task(data,user) :
     serializer = TaskSerializer(data)
     serializer.is_valid(raise_exception=True)
     serializer.save(user=user)
+
+def mark_task_as_completed(task_id) :
+    task = get_object_or_404(Task , task_id)
+    task.completed = True
+    task.save()
+    return Response({
+        "message":"task completed"
+    },
+    status=200
+    )

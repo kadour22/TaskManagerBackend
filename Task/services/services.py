@@ -10,3 +10,8 @@ def tasks_list(user):
     )
     serializer = TaskSerializer(tasks , many=True)
     return Response(serializer.data , status=200)
+
+def create_task(data,user) : 
+    serializer = TaskSerializer(data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save(user=user)

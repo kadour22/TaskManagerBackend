@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Task
+from .models import Task , Challenge
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,3 +11,12 @@ class TaskSerializer(serializers.ModelSerializer):
         if data["title"] == "":
             raise serializers.ValidationError("Title cannot be empty")
         return data
+
+
+class ChallengeSerializer(serializers.ModelSerializer) :
+    class Meta :
+        model  = Challenge
+        fields = "__all__"
+        readd_only_fields = [
+            "user"
+        ]

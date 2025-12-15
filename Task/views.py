@@ -19,7 +19,7 @@ class task_list_create(APIView) :
     def get(self,request):
         return tasks_list(user=request.user)
 
-class mark_task_as_completed(APIView):
+class Mark_task_as_completed(APIView):
     permission_classes= [IsAuthenticated]
     def post(self,request,task_id) :
         return mark_task_as_completed(task_id=task_id)

@@ -1,6 +1,6 @@
-from Task.models import Task
+from Task.models import Task, Challenge
 from django.shortcuts import get_object_or_404
-from Task.serializers import TaskSerializer
+from Task.serializers import TaskSerializer,ChallengeSerializer
 from rest_framework.response import Response
 
 
@@ -25,3 +25,8 @@ def mark_task_as_completed(task_id) :
     },
     status=200
     )
+
+def chanllenges_list() :
+    challenges = Challenge.objects.select_related("user").all()
+    serializer = ChallengeSerializer(challenges,many=True)
+    return Response(serializer.data, status=200)

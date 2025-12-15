@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 # local imports 
 from .serializers import TaskSerializer, ChallengeSerializer
 from .models import Task , Challenge
+from .services.services import tasks_list , create_task , mark_task_as_completed
 
 class task_list_create(APIView) :
     permission_classes = [IsAuthenticated]
@@ -20,9 +21,7 @@ class task_list_create(APIView) :
         return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
 
     def get(self,request):
-        tasks = Task.objects.select_related("user").all()
-        serializer = TaskSerializer(tasks , many=True)
-        return Response(serializer.data , status=status.HTTP_200_OK)
+        return tasks_list(user=request.user)
 
 
 class mark_task_as_completed(APIView):

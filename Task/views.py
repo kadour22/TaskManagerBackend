@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 # local imports 
 from .serializers import TaskSerializer, ChallengeSerializer
 from .models import Task , Challenge
-from .services.services import tasks_list , create_task , mark_task_as_completed
+from .services.services import tasks_list , create_task , mark_task_as_completed  ,chanllenges_list
 
 class task_list_create(APIView) :
     permission_classes = [IsAuthenticated]
@@ -27,11 +27,7 @@ class Mark_task_as_completed(APIView):
 class chanllenges_list_view(APIView) :
     permission_classes = [IsAuthenticated]
     def get(self, request) :
-        queryset = Challenge.objects.select_related(
-            'user'
-        ).all()
-        serializer = ChallengeSerializer(queryset , many=True)
-        return Response (serializer.data , status=status.HTTP_200_OK)
+        return chanllenges_list()
     
     def post(self, request):
         serializer = ChallengeSerializer(data=request.data)
